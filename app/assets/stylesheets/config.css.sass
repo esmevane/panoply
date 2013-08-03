@@ -1,0 +1,37 @@
+// These are only reused in this file.
+$sea-green: #81AFAE
+$eggplant: #7C80AC
+$off-blue: #7C9FAC
+$superblue: #34BDF0
+$off-white: #FAFAFA
+$ash-black: #1F1F1F
+
+// kuler - Beach Time
+$beach-time-green: #96CEB4
+$beach-time-lemon: #FFEEAD
+$beach-time-peach: #FF6F69
+$beach-time-mango: #FFCC5C
+$beach-time-limes: #AAD8B0
+
+// kuler - Afternoon Chai
+$afternoon-chai-pepper: #CFC291
+$afternoon-chai-sugars: #FFF6C5
+$afternoon-chai-minted: #A1E8D9
+$afternoon-chai-orange: #FF712C
+$afternoon-chai-oolong: #695D46
+
+// These are used in the application proper.  Change names with caution.
+$background-color: lighten(desaturate($afternoon-chai-sugars, 60%), 10%)
+$text-color: darken($afternoon-chai-oolong, 20%)
+$highlight: $beach-time-green
+$contrast: mix(complement($beach-time-green), $beach-time-peach)
+$font-size: 16px
+$letter-spacing: 1px
+$transition-rate: 300ms linear
+$border: 2px solid lighten($text-color, 70%)
+
+// Shadows
+$shadow-bottom: 0 $font-size/2 $font-size (-$font-size/1.5) $text-color
+$shadow-right: $font-size/2 0 $font-size (-$font-size/1.5) $text-color
+$shadow-left: (-$font-size/2) 0 $font-size (-$font-size/1.5) $text-color
+$shadow-card: $shadow-bottom, $shadow-right, $shadow-left

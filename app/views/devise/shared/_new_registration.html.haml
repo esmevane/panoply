@@ -1,0 +1,9 @@
+= devise_error_messages!
+.form-card
+  %h2 Sign up today for a free account
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    .form-name= f.text_field :name, placeholder: 'What is your name?'
+    .form-email= f.email_field :email, placeholder: 'What is your email address?'
+    .form-password= f.password_field :password, placeholder: 'Create a password'
+    .form-password= f.password_field :password_confirmation, placeholder: 'Confirm your password'
+    .form-button= f.submit "Sign up"

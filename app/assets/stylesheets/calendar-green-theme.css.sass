@@ -1,0 +1,42 @@
+.calendar.sea-green
+
+  .calendar-date
+    color: transparentize($background-color, 0.8)
+    font-size: $font-size * 2.5
+    line-height: $font-size * 11.78125 * 1.5
+    margin-right: $font-size / 2
+    a
+      color: transparentize($background-color, 0.8)
+
+  .calendar-day
+    background: $highlight
+    display: inline-block
+    height: $font-size * 8.125 * 1.35
+    width: $font-size * 8.125
+    text-align: right
+    transition: $transition-rate
+    &:hover
+      background: darken($highlight, 10%)
+
+  .calendar-day.calendar-inactive
+    background: lighten($text-color, 40%)
+    &:hover
+      background: lighten($text-color, 30%)
+
+  .calendar-day.calendar-today
+    background: saturate($contrast, 10%)
+    &:hover
+      background: darken(saturate($contrast, 20%), 10%)
+
+  .calendar-month
+    box-shadow: 0 1px $font-size / 4 $text-color
+    font-size: $font-size / 2
+    list-style: none
+    margin: 0 auto
+    padding: 0
+    width: $font-size * 56.875
+
+  .calendar-weekdays
+    list-style: none
+    padding: 0
+

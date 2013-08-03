@@ -1,0 +1,20 @@
+%h2 Book an appointment with #{tenant.name}
+
+%h3 Bio
+
+%h3 Therapists
+%ul
+  - members.each do |member|
+    %li= member.name
+
+%h3 This month
+.calendar.hokusai
+  %ul.calendar-month
+    = calendar_tag do |date|
+      .calendar-date= date.day
+      = time_slot_tag members, date do |slot, provider|
+        %span.time-slot-start= slot.starts_on
+        %span.time-slot-ends= slot.ends_on
+        %span.time-slot-provider= provider.name
+
+

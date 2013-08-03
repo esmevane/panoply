@@ -1,0 +1,9 @@
+#!/bin/sh
+
+npm install
+
+if [ "$#" -eq 1 ]; then
+  ./node_modules/jasmine-node/bin/jasmine-node spec/javascripts --captureExceptions --coffee --forceexit --verbose -m $1
+else
+  ./node_modules/jasmine-node/bin/jasmine-node spec/javascripts --captureExceptions --coffee --forceexit --verbose
+fi

@@ -11,7 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727220900) do
+ActiveRecord::Schema.define(:version => 20130803004621) do
+
+  create_table "availabilities", :force => true do |t|
+    t.integer  "provider_id"
+    t.datetime "starts_on"
+    t.datetime "ends_on"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "tenant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tenants", :force => true do |t|
+    t.string   "name"
+    t.string   "domain"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

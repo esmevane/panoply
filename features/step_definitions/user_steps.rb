@@ -122,10 +122,10 @@ When /^I sign in with a wrong password$/ do
 end
 
 When /^I edit my account details$/ do
-  click_link "Edit account"
+  click_link "Profile"
   fill_in "user_name", :with => "newname"
   fill_in "user_current_password", :with => @visitor[:password]
-  click_button "Update"
+  click_button "Change"
 end
 
 When /^I look at the list of users$/ do
@@ -135,12 +135,10 @@ end
 ### THEN ###
 Then /^I should be signed in$/ do
   page.should have_content "Logout"
-  page.should_not have_content "Sign up"
   page.should_not have_content "Login"
 end
 
 Then /^I should be signed out$/ do
-  page.should have_content "Sign up"
   page.should have_content "Login"
   page.should_not have_content "Logout"
 end

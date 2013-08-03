@@ -1,0 +1,59 @@
+// Hokusai Color Palette
+$hokusai-wave-spray: #699
+$hokusai-wave-cascade: #036
+$hokusai-wave-shadows: #003
+$hokusai-wave-horizon: #FC9
+$hokusai-wave-crest: #FFC
+
+// Calendar Calculations
+$border-width: 1px
+$calendar-width: 58.75
+$day-width: $calendar-width * 0.1251
+$font-with-border: $font-size + $border-width * 2
+$faded-dark: transparentize(desaturate($hokusai-wave-cascade, 30%), 0.5)
+
+$background-hokusai: transparentize($hokusai-wave-crest, 0.1)
+$border-hokusai: $border-width solid desaturate($hokusai-wave-horizon, 50%)
+$border-dark: $border-width solid $faded-dark
+
+.calendar.hokusai
+
+  .calendar-date
+    color: transparentize($text-color, 0.8)
+    font:
+      size: $font-size * 2
+      weight: 900
+    line-height: $font-size * $day-width * 1.75
+    margin-right: $font-size
+    text-align: right
+
+  .calendar-day
+    border: $border-dark
+    display: inline-block
+    height: $font-with-border * $day-width
+    margin: 0
+    padding: 0
+    position: relative
+    width: $font-with-border * $day-width
+
+  .calendar-day.calendar-inactive
+    background: transparentize($hokusai-wave-cascade, 0.5)
+    .calendar-date
+      color: transparentize($background-color, 0.75)
+
+  .calendar-day.calendar-today
+    background: transparentize($hokusai-wave-horizon, 0.75)
+
+  .calendar-month
+    background: lighten($background-hokusai, 5%)
+    border: $border-dark
+    box-shadow: $shadow-bottom, $shadow-right, $shadow-left
+    list-style: none
+    margin: 0
+    padding: 0
+    width: $font-size * $calendar-width
+
+  .calendar-weekdays
+    list-style: none
+    margin: 0
+    padding: 0

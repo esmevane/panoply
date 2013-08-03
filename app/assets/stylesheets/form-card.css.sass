@@ -1,0 +1,27 @@
+.form-card
+  background: transparentize(lighten($background-color, 30%), 0.15)
+  border: $border
+  display: block
+  width: $font-size * 20
+  text-align: center
+  margin: 0 auto $font-size * 3
+  box-shadow: $shadow-bottom
+
+  h2, h3
+    color: transparentize($text-color, 0.4)
+
+  h2
+    text-transform: uppercase
+
+  h3
+    margin: 0
+
+  fieldset
+    width: $font-size * 16
+    margin: 0 auto
+    border: none
+    border-top: $border
+
+  small
+    color: transparentize($text-color, 0.4)
+    font-size: $font-size / 1.5

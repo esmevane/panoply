@@ -2,100 +2,114 @@ require 'spec_helper'
 
 describe User do
 
-  before(:each) do
-    @attr = {
-      :name => "Example User",
-      :email => "user@example.com",
-      :password => "changeme",
-      :password_confirmation => "changeme"
-    }
+  it { should have_many :memberships }
+  it { should have_many(:tenancies).through :memberships }
+  it { should have_many(:availabilities) }
+
+  describe "passwords" do
+    let(:user) { Fabricate :user, attributes }
+    subject { user }
+    it { should respond_to :password }
+    it { should respond_to :password_confirmation }
+  end
+
+  let(:attributes) do
+    { name: "Example User",
+      email: "user@example.com",
+      password: "changeme",
+      password_confirmation: "changeme" }
   end
 
   it "should create a new instance given a valid attribute" do
-    User.create!(@attr)
+    User.create! attributes
   end
 
-  it "should require an email address" do
-    no_email_user = User.new(@attr.merge(:email => ""))
-    no_email_user.should_not be_valid
-  end
+  describe 'email validations' do
 
-  it "should accept valid email addresses" do
-    addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
-    addresses.each do |address|
-      valid_email_user = User.new(@attr.merge(:email => address))
-      valid_email_user.should be_valid
-    end
-  end
+    let(:no_email) { attributes.merge email: '' }
+    let(:upcased_email) { attributes[:email].upcase }
 
-  it "should reject invalid email addresses" do
-    addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
-    addresses.each do |address|
-      invalid_email_user = User.new(@attr.merge(:email => address))
-      invalid_email_user.should_not be_valid
-    end
-  end
-
-  it "should reject duplicate email addresses" do
-    User.create!(@attr)
-    user_with_duplicate_email = User.new(@attr)
-    user_with_duplicate_email.should_not be_valid
-  end
-
-  it "should reject email addresses identical up to case" do
-    upcased_email = @attr[:email].upcase
-    User.create!(@attr.merge(:email => upcased_email))
-    user_with_duplicate_email = User.new(@attr)
-    user_with_duplicate_email.should_not be_valid
-  end
-
-  describe "passwords" do
-
-    before(:each) do
-      @user = User.new(@attr)
+    let(:good_addresses) do
+      %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
     end
 
-    it "should have a password attribute" do
-      @user.should respond_to(:password)
+    let(:bad_addresses) do
+      %w[user@foo,com user_at_foo.org example.user@foo.]
     end
 
-    it "should have a password confirmation attribute" do
-      @user.should respond_to(:password_confirmation)
+    it "should require an email address" do
+      no_email_user = User.new no_email
+      no_email_user.should_not be_valid
+    end
+
+    it "should accept valid email addresses" do
+      good_addresses.each do |address|
+        user = User.new attributes.merge email: address
+        user.should be_valid
+      end
+    end
+
+    it "should reject invalid email addresses" do
+      bad_addresses.each do |address|
+        user = User.new attributes.merge email: address
+        user.should_not be_valid
+      end
+    end
+
+    it "should reject duplicate email addresses" do
+      Fabricate :user, attributes
+      user = User.new attributes
+      user.should_not be_valid
+    end
+
+    it "should reject email addresses identical up to case" do
+      Fabricate :user, attributes.merge(email: upcased_email)
+      user = User.new attributes
+      user.should_not be_valid
     end
   end
 
   describe "password validations" do
 
-    it "should require a password" do
-      User.new(@attr.merge(:password => "", :password_confirmation => "")).
-        should_not be_valid
+    subject { user }
+
+    describe 'without passwords' do
+      let(:blank_passwords) do
+        { password: "", password_confirmation: "" }
+      end
+      let(:user) { User.new attributes.merge blank_passwords }
+      it { should_not be_valid }
     end
 
-    it "should require a matching password confirmation" do
-      User.new(@attr.merge(:password_confirmation => "invalid")).
-        should_not be_valid
+    describe 'without matching confirms' do
+      let(:invalid_confirm) do
+        { password_confirmation: "invalid" }
+      end
+      let(:user) { User.new attributes.merge invalid_confirm }
+      it { should_not be_valid }
     end
 
-    it "should reject short passwords" do
-      short = "a" * 5
-      hash = @attr.merge(:password => short, :password_confirmation => short)
-      User.new(hash).should_not be_valid
+    describe 'with short passwords' do
+      let(:short_password) { "abcde" }
+      let(:short_passwords) do
+        { password: short_password, password_confirmation: short_password }
+      end
+      let(:user) { User.new attributes.merge short_passwords }
+      it { should_not be_valid }
     end
 
   end
 
   describe "password encryption" do
 
-    before(:each) do
-      @user = User.create!(@attr)
-    end
+    let(:user) { Fabricate :user, attributes }
 
-    it "should have an encrypted password attribute" do
-      @user.should respond_to(:encrypted_password)
-    end
+    subject { user }
+
+    it { should respond_to :encrypted_password }
 
     it "should set the encrypted password attribute" do
-      @user.encrypted_password.should_not be_blank
+      subject.encrypted_password.should_not be_blank
     end
 
   end

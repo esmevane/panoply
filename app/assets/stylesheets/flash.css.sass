@@ -1,0 +1,21 @@
+#flash_notice
+  background: $highlight
+  border: 2px solid lighten($highlight, 30%)
+  color: $background-color
+  text-align: center
+  transition: $transition-rate
+  &:hover
+    background: lighten($highlight, 10%)
+  &:active
+    background: lighten($highlight, 15%)
+
+#flash_alert
+  background: $contrast
+  border: 2px solid lighten($contrast, 30%)
+  color: $background-color
+  text-align: center
+  transition: $transition-rate
+  &:hover
+    background: lighten($contrast, 10%)
+  &:active
+    background: lighten($contrast, 15%)

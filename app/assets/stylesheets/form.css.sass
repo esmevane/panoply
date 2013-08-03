@@ -1,0 +1,61 @@
+form div
+  margin: 0 0 $font-size
+
+input, select
+  background: lighten($background-color, 3%)
+  border: none
+  box-shadow: 0 1px $font-size / 4 $highlight
+  color: lighten($text-color, 40%)
+  font-size: $font-size
+  padding: $font-size * 0.5
+  transition: $transition-rate
+  &:focus
+    background: lighten($background-color, 10%)
+    box-shadow: 0 1px $font-size / 2 $highlight
+
+input[type=submit]
+  background: darken($highlight, 20%)
+  color: $background-color
+  text-transform: uppercase
+  font-size: $font-size * 1.25
+  &:hover
+    background-color: darken($highlight, 10%)
+  &:active
+    background-color: lighten($highlight, 10%)
+
+#error_explanation
+  background: $contrast
+  padding: $font-size * 0.45 $font-size * 1.45
+  border: 2px solid darken($contrast, 5%)
+  box-shadow: 0 8px $font-size / 2 -8px darken($contrast, 30%)
+  margin-bottom: $font-size * 2
+  color: $background-color
+  transition: $transition-rate
+  &:hover
+    background: lighten($contrast, 10%)
+  &:active
+    background: lighten($contrast, 15%)
+  h2
+    margin: 0
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+  li
+    margin: 0
+    margin-top: 3px
+
+.field_with_errors input
+  box-shadow: 0 1px $font-size / 4 $contrast
+  border: none
+
+.field_with_errors
+  display: inline
+
+.form-button-warning
+  input
+    background: transparentize(darken($contrast, 20%), 0.7)
+    &:hover
+      background-color: transparentize(darken($contrast, 10%), 0.5)
+    &:active
+      background-color: transparentize(lighten($contrast, 10%), 0.5)

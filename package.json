@@ -1,0 +1,11 @@
+{
+  "name": "panoply",
+  "version": "0.0.1",
+  "dependencies": {
+    "underscore": "",
+    "backbone": "",
+    "jquery": "",
+    "jasmine-node": "",
+    "coffee-script": ""
+  }
+}

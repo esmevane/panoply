@@ -1,0 +1,1 @@
+describe "Panoply", -> it "exists", -> expect(Panoply).toBeDefined()
