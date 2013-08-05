@@ -1,0 +1,6 @@
+- if collection.any?
+  #error_explanation
+    %h2 The following errors held us up
+    %ul
+      - collection.each do |error|
+        %li= error

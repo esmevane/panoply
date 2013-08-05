@@ -1,11 +1,8 @@
 Panoply::Application.routes.draw do
 
-  authenticated :user do
-    root to: 'home#index'
-  end
-
   constraints(SubdomainConstraint) do
     resources :appointments, only: [ :index ]
+    resources :requests, only: [ :new, :create ]
     root to: 'appointments#index'
   end
 
