@@ -1,14 +1,7 @@
-// Hokusai Color Palette
-$hokusai-wave-spray: #699
-$hokusai-wave-cascade: #036
-$hokusai-wave-shadows: #003
-$hokusai-wave-horizon: #FC9
-$hokusai-wave-crest: #FFC
-
 // Calendar Calculations
 $border-width: 1px
 $calendar-width: 58.75
-$day-width: $calendar-width * 0.1251
+$day-width: $calendar-width * 0.1269
 $font-with-border: $font-size + $border-width * 2
 $faded-dark: transparentize(desaturate($hokusai-wave-cascade, 30%), 0.5)
 
@@ -16,7 +9,7 @@ $background-hokusai: transparentize($hokusai-wave-crest, 0.1)
 $border-hokusai: $border-width solid desaturate($hokusai-wave-horizon, 50%)
 $border-dark: $border-width solid $faded-dark
 
-.calendar.hokusai
+.calendar
 
   .calendar-date
     color: transparentize($text-color, 0.8)
@@ -28,7 +21,6 @@ $border-dark: $border-width solid $faded-dark
     text-align: right
 
   .calendar-day
-    border: $border-dark
     display: inline-block
     height: $font-with-border * $day-width
     margin: 0
@@ -45,9 +37,7 @@ $border-dark: $border-width solid $faded-dark
     background: transparentize($hokusai-wave-horizon, 0.75)
 
   .calendar-month
-    background: lighten($background-hokusai, 5%)
-    border: $border-dark
-    box-shadow: $shadow-bottom, $shadow-right, $shadow-left
+    background: transparentize($background-color, 0.025)
     list-style: none
     margin: 0
     padding: 0

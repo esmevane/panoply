@@ -1,12 +1,12 @@
-class SignupRequestForm
-  attr_accessor :slot_id, :name, :email, :password, :password_confirmation
-  attr_reader :user
+class LoginRequestForm
+  attr_accessor :slot_id, :email, :password
+  attr_reader :user, :controller
 
   extend ActiveModel::Naming
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  delegate :valid?, :errors, to: :user
+  delegate :errors, to: :user
 
   class << self
     def model_name
@@ -15,7 +15,9 @@ class SignupRequestForm
   end
 
   def initialize user, params, session, controller = nil
-    @user = new_user_with_params params, session
+    @user = User.where(email: params[:email]).first
+    @password = params[:password]
+    @controller = controller
   end
 
   def notice
@@ -37,14 +39,21 @@ class SignupRequestForm
 
   private
 
-  def new_user_with_params params, session
-    user_params = params.symbolize_keys.except(:slot_id)
-    User.new_with_session user_params, session
+  def valid?
+    user.valid_password? password
+  end
+
+  def valid_password
+    errors.add(:password, "is invalid") unless user.valid_password? password
   end
 
   def persist!
-    user.save
+    sign_in
     Request.create sender: user, availability_id: slot_id
+  end
+
+  def sign_in
+    controller.sign_in :user, user
   end
 
 end

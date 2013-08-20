@@ -6,25 +6,25 @@ class DummyController
   end
 end
 
-describe SignupRequestForm do
+describe LoginRequestForm do
 
-  let(:session) { Hash.new }
+  let(:email) { "twoods@example.com" }
+  let(:password) { "changeme" }
+  let(:user) { Fabricate :user, email: email, password: password }
   let(:slot) { Fabricate :availability, provider: Fabricate(:user) }
+  let(:session) { Hash.new }
+  let(:controller) { DummyController.new }
   let(:slot_id) { slot.id }
-  let(:form) { SignupRequestForm.new nil, params, session, DummyController.new }
+  let(:form) { LoginRequestForm.new nil, params, session, controller }
 
   let(:params) do
-    { name: "Talina Woods",
-      email: "twoods@example.com",
-      password: "changeme",
-      password_confirmation: "changeme",
-      slot_id: slot_id }
+    { email: email, password: password, slot_id: slot_id }
   end
 
   subject { form }
 
   describe '.model_name' do
-    subject { SignupRequestForm.model_name }
+    subject { LoginRequestForm.model_name }
     it { should == "RequestForm" }
   end
 
@@ -44,12 +44,13 @@ describe SignupRequestForm do
 
       before { form.stub(:valid?) { true } }
 
-      it "creates a new user" do
-        expect { form.submit }.to change { User.count }
-      end
-
       it "creates a new record" do
         Request.should_receive(:create)
+        form.submit
+      end
+
+      it "signs the user in" do
+        form.controller.should_receive(:sign_in).with(:user, form.user)
         form.submit
       end
 

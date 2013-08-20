@@ -1,18 +1,29 @@
 require 'spec_helper'
 
-describe RequestForm do
+class DummyController
+  def sign_in(key, object)
+    nil
+  end
+end
+
+describe ConfirmRequestForm do
 
   let(:user) { Fabricate :user }
   let(:slot) { Fabricate :availability, provider: user }
   let(:slot_id) { slot.id }
   let(:password) { "changeme" }
-  let(:form) { RequestForm.new user, params }
+  let(:form) { ConfirmRequestForm.new user, params, {}, DummyController.new }
 
   let(:params) do
     { password: password, slot_id: slot_id }
   end
 
   subject { form }
+
+  describe '.model_name' do
+    subject { ConfirmRequestForm.model_name }
+    it { should == "RequestForm" }
+  end
 
   it { should validate_presence_of :password }
   it { should validate_presence_of :slot_id }

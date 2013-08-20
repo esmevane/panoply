@@ -1,17 +1,23 @@
 // *= require_self
-
+// Settings
 @import "config.css.sass"
-@import "calendar-green-theme.css.sass"
-@import "calendar-hokusai-theme.css.sass"
+@import "themes.css.sass"
+@import "mixins.css.sass"
+
+// Modules
+@import "bubble-list.css.sass"
+@import "calendar.css.sass"
+@import "calendar-page.css.sass"
 @import "flash.css.sass"
 @import "form.css.sass"
 @import "form-card.css.sass"
 @import "headline.css.sass"
 @import "navigation.css.sass"
-@import "themes.css.sass"
+@import "states.css.sass"
 @import url(http://fonts.googleapis.com/css?family=Oxygen)
 
 body
+  @include themed
   background: $background-color
   color: $text-color
   font:
@@ -19,7 +25,10 @@ body
     size: $font-size
   letter-spacing: $letter-spacing
   line-height: $font-size * 1.75
-  margin: $font-size * 5 $font-size * 6 $font-size * 0
+  text-align: center
+  margin: 0
+  overflow-x: hidden
+  padding: 0
 
 a
   color: lighten($text-color, 10%)
@@ -29,3 +38,11 @@ a
   transition: $transition-rate
   &:hover
     color: $highlight
+
+header, footer, #container
+  text-align: left
+
+#container
+  margin: $font-size * 5 auto 0
+  display: inline-block
+  text-align: left

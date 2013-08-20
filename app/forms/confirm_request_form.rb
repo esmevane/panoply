@@ -1,5 +1,5 @@
-class RequestForm
-  attr_accessor :password, :slot_id
+class ConfirmRequestForm
+  attr_accessor :password, :slot_id, :name, :email
 
   extend ActiveModel::Naming
   include ActiveModel::Conversion
@@ -10,7 +10,13 @@ class RequestForm
 
   validate :valid_password
 
-  def initialize user, params
+  class << self
+    def model_name
+      ActiveModel::Name.new self, nil, "RequestForm"
+    end
+  end
+
+  def initialize user, params, session, controller = nil
     @user = user
     @password = params && params.fetch(:password) { nil }
     @slot_id = params && params.fetch(:slot_id) { nil }

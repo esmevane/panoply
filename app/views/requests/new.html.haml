@@ -1,15 +1,28 @@
 = render 'layouts/errors', collection: request_form.errors.full_messages
 .form-card
-  = form_for request_form, url: requests_path do |form|
-    = form.hidden_field :slot_id
-    - if user_signed_in?
+  - if user_signed_in?
+    = form_for request_form, url: requests_path do |form|
+      = form.hidden_field :slot_id
+      = hidden_field_tag :form_target, 'confirm'
       %h2 Confirm your password to request an appointment
       .form-password= form.password_field :password, placeholder: 'Password'
       .form-button= form.submit "Send request"
-    - else
-      %h2 Sign up to request an appointment
-      .form-name= form.text_field :name, placeholder: 'What is your name?'
-      .form-email= form.email_field :email, placeholder: 'What is your email address?'
-      .form-password= form.password_field :password, placeholder: 'Create a password'
-      .form-password= form.password_field :password_confirmation, placeholder: 'Confirm your password'
-      .form-button= form.submit "Sign up and request"
+  - else
+    #signup-request-form
+      = form_for request_form, url: requests_path do |form|
+        = form.hidden_field :slot_id
+        = hidden_field_tag :form_target, 'signup'
+        %h2 Need an account?
+        .form-name= form.text_field :name, placeholder: 'What is your name?'
+        .form-email= form.email_field :email, placeholder: 'What is your email address?'
+        .form-password= form.password_field :password, placeholder: 'Create a password'
+        .form-password= form.password_field :password_confirmation, placeholder: 'Confirm your password'
+        .form-button= form.submit "Sign up and request"
+    #login-request-form
+      = form_for request_form, url: requests_path do |form|
+        = form.hidden_field :slot_id
+        = hidden_field_tag :form_target, 'login'
+        %h2 Have an account?
+        .form-email= form.email_field :email, placeholder: 'What is your email address?'
+        .form-password= form.password_field :password, placeholder: 'Create a password'
+        .form-button= form.submit "Log in and request"

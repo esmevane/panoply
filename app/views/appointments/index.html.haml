@@ -1,16 +1,10 @@
-%h2 Book an appointment with #{tenant.name}
-%h3 Bio
-%h3 Therapists
-%ul
-  - members.each do |member|
-    %li= member.name
-%h3 This month
-.calendar.hokusai
-  %ul.calendar-month
-    = calendar_tag do |date|
-      .calendar-date= date.day
-      = time_slot_tag members, date do |slot, provider|
-        %a{ href: new_request_path(slot: slot) }
-          %span.time-slot-start= slot.starts_on
-          %span.time-slot-ends= slot.ends_on
-          %span.time-slot-provider= provider.name
+.calendar-page
+  %h2 Book an appointment with #{tenant.name}
+  %ul.calendar-page-list
+    - members.each do |member|
+      %li.calendar-page-list-item
+        %span.calendar-page-list-item-label= member.name
+        %ul
+          - time_slots_for_today(member).each do |slot|
+            %li.calendar-page-time-slot= link_to slot.starts_on.strftime("%l:%M %P"), make_requests_path(slot)
+  .calendar-page-date-label= Date.today.strftime("%e")

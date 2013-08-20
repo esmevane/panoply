@@ -6,12 +6,12 @@ Feature: Calendar
 
   Scenario: Visiting a tenant's calendar
     Given the tenant Fiddlehead Fern
-    When I visit the Fiddlehead Fern home page
+    When I visit the Fiddlehead Fern calendar
     Then I should see the appointment calendar
 
   Scenario: Visiting an unoccupied tenant calendar
     Given I have no tenants
-    When I visit the Fiddlehead Fern home page
+    When I visit the Fiddlehead Fern calendar
     Then I should not see the appointment calendar
     And I should see the standard application greeting
 
@@ -37,13 +37,3 @@ Feature: Calendar
     And they each have one 6-hour time slot today
     When I visit the Fiddlehead Fern calendar
     Then I should see three time slots
-
-  Scenario: Visitor making an appointment request
-    Given I have a tenant with available time
-    When I make a request for a time slot
-    Then I should see the request sent confirmation
-
-  Scenario: User making an appointment request
-    Given I have a tenant with available time
-    When I make a request for a time slot while logged in
-    Then I should see the request sent confirmation

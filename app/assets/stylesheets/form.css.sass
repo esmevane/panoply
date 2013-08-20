@@ -24,17 +24,7 @@ input[type=submit]
     background-color: lighten($highlight, 10%)
 
 #error_explanation
-  background: $contrast
-  padding: $font-size * 0.45 $font-size * 1.45
-  border: 2px solid darken($contrast, 5%)
-  box-shadow: 0 8px $font-size / 2 -8px darken($contrast, 30%)
-  margin-bottom: $font-size * 2
-  color: $background-color
-  transition: $transition-rate
-  &:hover
-    background: lighten($contrast, 10%)
-  &:active
-    background: lighten($contrast, 15%)
+  @include high-visibility-box($contrast)
   h2
     margin: 0
   ul
@@ -44,6 +34,7 @@ input[type=submit]
   li
     margin: 0
     margin-top: 3px
+
 
 .field_with_errors input
   box-shadow: 0 1px $font-size / 4 $contrast
