@@ -1,11 +1,19 @@
 require 'spec_helper'
 
 describe SignupRequestForm do
+  it_behaves_like "a request form"
+
+  let(:arguments) do
+    { user: nil,
+      params: params,
+      session: session,
+      controller: DummyController.new }
+  end
 
   let(:session) { Hash.new }
   let(:slot) { Fabricate :availability, provider: Fabricate(:user) }
-  let(:slot_id) { slot.id }
-  let(:form) { SignupRequestForm.new params, session }
+  let(:slot_id) { 1 }
+  let(:form) { described_class.new arguments }
 
   let(:params) do
     { name: "Talina Woods",
@@ -17,25 +25,8 @@ describe SignupRequestForm do
 
   subject { form }
 
-  describe '.model_name' do
-    subject { SignupRequestForm.model_name }
-    it { should == RequestForm.model_name }
-  end
-
-  describe '#notice' do
-    let(:notice) { "Thank you!  Your appointment request has been sent" }
-    subject { form.notice }
-    it { should == notice }
-  end
-
-  describe '#persisted?' do
-    subject { form.persisted? }
-    it { should be_false }
-  end
-
   describe '#submit' do
     context 'when #valid? is true' do
-
       before { form.stub(:valid?) { true } }
 
       it "creates a new user" do

@@ -10,4 +10,5 @@ class Membership < ActiveRecord::Base
       create user: user, tenant: tenant
     end
   end
+
 end

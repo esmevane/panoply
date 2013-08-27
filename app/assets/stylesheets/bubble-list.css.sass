@@ -1,0 +1,36 @@
+$bubble-color: mix($hokusai-wave-cascade, $hokusai-wave-crest, 70%)
+$bubble-label: mix($background-color, $hokusai-wave-crest, 70%)
+$bubble-size: $font-size * 10
+
+.calendar-headline
+  background: transparentize($background-color, 0.1)
+  border-left: $font-size solid transparentize($bubble-color, 0.2)
+  padding-left: $font-size
+  line-height: $font-size * 3
+
+ul.bubble-list
+  @include justify
+  list-style: none
+  margin: 0
+  padding: 0
+
+li.bubble-list-item
+  @include encircle($bubble-size)
+  background: transparentize($background-color, 0.1)
+  border: $font-size/2 solid transparentize($bubble-color, 0.2)
+  color: transparentize($text-color, 0.1)
+  display: inline-block
+  position: relative
+  z-index: 1
+
+.bubble-label
+  background: transparentize($bubble-label, 0.1)
+  bottom: $bubble-size / 15
+  box-shadow: $shadow-bottom
+  display: block
+  position: absolute
+  font:
+    size: $font-size * 1.25
+    weight: 800
+  width: $bubble-size
+  z-index: 2

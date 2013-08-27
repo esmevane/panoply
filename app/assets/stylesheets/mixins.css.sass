@@ -1,0 +1,33 @@
+@mixin high-visibility-box($color)
+  background: $color
+  padding: $font-size * 0.45 $font-size * 1.45
+  border: 2px solid darken($color, 5%)
+  box-shadow: 0 8px $font-size / 2 -8px darken($color, 30%)
+  margin-bottom: $font-size * 1
+  color: $background-color
+  transition: $transition-rate
+  &:hover
+    background: lighten($color, 10%)
+  &:active
+    background: lighten($color, 15%)
+
+@mixin encircle($size)
+  border-radius: $size
+  height: $size
+  text-align: center
+  width: $size
+
+@mixin absolute-center
+  margin: auto
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  position: absolute
+
+@mixin justify
+  text-align: justify
+  &:after
+    content: ' '
+    display: inline-block
+    width: 100%
