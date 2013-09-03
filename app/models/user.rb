@@ -12,5 +12,7 @@ class User < ActiveRecord::Base
   has_many :availabilities, foreign_key: :provider_id
   has_many :memberships
   has_many :tenancies, through: :memberships, source: :tenant
+  has_many :subscriptions, foreign_key: :owner_id
+  has_many :owned_tenancies, through: :subscriptions, source: :tenants
 
 end

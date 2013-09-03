@@ -17,11 +17,12 @@ gem 'devise'
 gem 'figaro'
 gem 'haml-rails'
 gem 'pg'
+gem 'stripe'
 gem 'unicorn'
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
+  gem 'binding_of_caller', platforms: [:mri_19, :rbx]
   gem 'html2haml'
   gem 'pry-rails'
   gem 'quiet_assets'
@@ -35,7 +36,8 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'cucumber-rails', :require=>false
+  gem 'capybara-webkit'
+  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'launchy'

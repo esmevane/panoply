@@ -1,2 +1,5 @@
 - unless user_signed_in?
+  .form-card
+    %h2 You're too busy to spend every day worrying about this
+    = button_to "Subscribe today", new_subscription_path, method: 'get'
   = render 'devise/shared/new_registration'

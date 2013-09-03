@@ -1,0 +1,32 @@
+= javascript_include_tag 'https://js.stripe.com/v2'
+
+= render 'layouts/errors', collection: subscription_form.errors.full_messages
+
+.form-card
+  %h2 Get started
+  #subscription-form
+    = form_for subscription_form, url: subscriptions_path do |form|
+      = form.hidden_field :stripe_token
+      .form-name= form.text_field :name, placeholder: 'What is your name?'
+      .form-email= form.email_field :email, placeholder: 'What is your email address?'
+      .form-name= form.text_field :organization_name, placeholder: "What is your organization's name?"
+      .form-password= form.password_field :password, placeholder: 'Create a password'
+      .form-password= form.password_field :password_confirmation, placeholder: 'Confirm your password'
+      - if subscription_form.stripe_token.present?
+        %h3 Your credit information has already been approved.
+      - else
+        .form-card-info
+          %input#card-number{ placeholder: 'XXXX-XXXX-XXXX-XXXX', type: 'text', size: 24, data: { stripe: 'number' } }
+          %input#card-code{ placeholder: 'CVC', type: 'text', size: 1, data: { stripe: 'cvc' } }
+        .form-card-expiry
+          = select_month nil, { add_month_numbers_true: true }, name: nil, "data-stripe" => 'exp-month'
+          = select_year nil, { start_year: Date.today.year, end_year: Date.today.year + 15 }, name: nil, "data-stripe" => 'exp-year'
+      .form-button= form.submit "Subscribe"
+
+:javascript
+  Stripe.setPublishableKey('#{StripeCredentials.public_key}');
+
+  $(document).ready(function() {
+    Panoply.Apps.Subscribe.Capture('#subscription-form');
+  });
+

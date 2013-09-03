@@ -13,6 +13,9 @@ input, select
     background: lighten($background-color, 10%)
     box-shadow: 0 1px $font-size / 2 $highlight
 
+select
+  height: $font-size * 2
+
 input[type=submit]
   background: darken($highlight, 20%)
   color: $background-color
@@ -22,6 +25,8 @@ input[type=submit]
     background-color: darken($highlight, 10%)
   &:active
     background-color: lighten($highlight, 10%)
+  &:disabled
+    opacity: 0.3
 
 #error_explanation
   @include high-visibility-box($contrast)
@@ -34,7 +39,6 @@ input[type=submit]
   li
     margin: 0
     margin-top: 3px
-
 
 .field_with_errors input
   box-shadow: 0 1px $font-size / 4 $contrast

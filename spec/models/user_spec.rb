@@ -4,6 +4,10 @@ describe User do
 
   it { should have_many :memberships }
   it { should have_many(:tenancies).through :memberships }
+
+  it { should have_many :subscriptions }
+  it { should have_many(:owned_tenancies).through :subscriptions }
+
   it { should have_many(:availabilities) }
 
   describe "passwords" do

@@ -4,6 +4,7 @@ describe Tenant do
 
   it { should have_many :memberships }
   it { should have_many(:members).through :memberships }
+  it { should belong_to :subscription }
 
   let(:tenant) { Fabricate(:tenant, name: "Fiddlehead Fern") }
 

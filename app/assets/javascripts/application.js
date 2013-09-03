@@ -17,3 +17,5 @@
 //= require backbone
 //= require_tree ./templates
 //= require panoply
+//= require_tree ./apps
+//= require_tree ./modules

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804030553) do
+ActiveRecord::Schema.define(:version => 20130902004445) do
 
   create_table "availabilities", :force => true do |t|
     t.integer  "provider_id"
@@ -35,11 +35,19 @@ ActiveRecord::Schema.define(:version => 20130804030553) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "subscriptions", :force => true do |t|
+    t.string   "stripe_token"
+    t.integer  "owner_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "tenants", :force => true do |t|
     t.string   "name"
     t.string   "domain"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "subscription_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "users", :force => true do |t|
