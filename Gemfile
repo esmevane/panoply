@@ -7,7 +7,7 @@ gem 'rails', '3.2.13'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier',     '>= 1.0.3'
   gem 'haml_coffee_assets'
   gem 'execjs'
 end
@@ -22,8 +22,9 @@ gem 'unicorn'
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', platforms: [:mri_19, :rbx]
+  gem 'binding_of_caller', platforms: [ :mri_19, :rbx ]
   gem 'html2haml'
+  gem 'meta_request'
   gem 'pry-rails'
   gem 'quiet_assets'
 end
